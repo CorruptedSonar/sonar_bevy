@@ -65,7 +65,7 @@ bytemuck = { version = "1.5", optional = true }
 
 # other
 # feature rwh_06 refers to window_raw_handle@v0.6
-winit = { version = "0.30", default-features = false, features = ["rwh_06"] }
+winit = {version = "0.30.14", default-features = false, features = ["rwh_06"]  }
 accesskit_winit = { version = "0.34", default-features = false, features = [
   "rwh_06",
 ] }

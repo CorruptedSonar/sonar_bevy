@@ -311,6 +311,7 @@ pub(crate) struct CachedCursorOptions(CursorOptions);
 ///
 /// - [`Window::present_mode`] and [`Window::composite_alpha_mode`] changes are handled by the `bevy_render` crate.
 /// - [`Window::transparent`] cannot be changed after the window is created.
+/// - [`Window::ex_transparent`] cannot be changed after the window is created.
 /// - [`Window::canvas`] cannot be changed after the window is created.
 /// - [`Window::focused`] cannot be manually changed to `false` after the window is created.
 pub(crate) fn changed_windows(
@@ -511,6 +512,11 @@ pub(crate) fn changed_windows(
             // Currently unsupported changes
             if window.transparent != cache.transparent {
                 window.transparent = cache.transparent;
+                warn!("Winit does not currently support updating transparency after window creation.");
+            }
+
+            if window.ex_transparent != cache.ex_transparent {
+                window.ex_transparent = cache.ex_transparent;
                 warn!("Winit does not currently support updating transparency after window creation.");
             }
 

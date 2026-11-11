@@ -1,6 +1,6 @@
 [package]
 name = "bevy"
-version = "0.20.0-dev"
+version = "0.20.1-dev"
 edition = "2024"
 categories = ["game-engines", "graphics", "gui", "rendering"]
 description = "A refreshingly simple data-driven game engine and app framework"
@@ -8,7 +8,7 @@ exclude = ["assets/", "tools/", ".github/", "crates/", "examples/wasm/assets/"]
 homepage = "https://bevy.org"
 keywords = ["game", "engine", "gamedev", "graphics", "bevy"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/bevyengine/bevy"
+repository = "https://github.com/CorruptedSonar/sonar_bevy"
 documentation = "https://docs.rs/bevy"
 rust-version = "1.97.1"
 
@@ -134,6 +134,9 @@ unexpected_cfgs = { level = "warn", check-cfg = ['cfg(docsrs_dep)'] }
 unsafe_code = "deny"
 unsafe_op_in_unsafe_fn = "warn"
 unused_qualifications = "warn"
+
+[patch.crates-io]
+winit = {git = 'https://github.com/CorruptedSonar/sonar_winit' }
 
 [features]
 default = ["2d", "3d", "ui", "audio"]
