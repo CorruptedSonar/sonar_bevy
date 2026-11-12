@@ -121,7 +121,7 @@ impl WinitWindows {
             .with_enabled_buttons(convert_enabled_buttons(window.enabled_buttons))
             .with_decorations(window.decorations)
             .with_transparent(window.transparent)
-            .with_ex_transparent(window.ex_transparent)
+            .with_layered(window.layered)
             .with_active(window.focused);
 
         #[cfg(target_os = "windows")]

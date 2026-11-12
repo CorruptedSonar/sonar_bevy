@@ -224,17 +224,13 @@ pub struct Window {
     /// macOS transparent works with winit out of the box, so this issue might be related to: <https://github.com/gfx-rs/wgpu/issues/687>.
     /// You should also set the window `composite_alpha_mode` to `CompositeAlphaMode::PostMultiplied`.
     pub transparent: bool,
-    /// Get/set whether the window is focused.
+    /// Should the window use the Windows layered-window style?
     ///
-    /// It cannot be set unfocused after creation.
+    /// This enables `WS_EX_LAYERED` on Windows. It does not configure the
+    /// graphics surface or provide per-pixel alpha content by itself.
     ///
-    /// ## Platform-specific
-    ///
-    /// - iOS / Android / X11 / Wayland: Spawning unfocused is
-    ///   [not supported](https://docs.rs/winit/latest/winit/window/struct.WindowAttributes.html#method.with_active).
-    /// - iOS / Android / Web / Wayland: Setting focused after creation is
-    ///   [not supported](https://docs.rs/winit/latest/winit/window/struct.Window.html#method.focus_window).
-    pub ex_transparent: bool,
+    /// This setting is ignored on platforms other than Windows.
+    pub layered: bool,
     /// Get/set whether the window is focused.
     ///
     /// It cannot be set unfocused after creation.
@@ -506,7 +502,7 @@ impl Default for Window {
             enabled_buttons: Default::default(),
             decorations: true,
             transparent: false,
-            ex_transparent: false,
+            layered: false,
             focused: true,
             window_level: Default::default(),
             fit_canvas_to_parent: false,
@@ -1520,6 +1516,11 @@ pub enum ScreenEdge {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn layered_window_style_is_disabled_by_default() {
+        assert!(!Window::default().layered);
+    }
 
     // Checks that `Window::physical_cursor_position` returns the cursor position if it is within
     // the bounds of the window.
